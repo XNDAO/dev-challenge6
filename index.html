@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <title>QR code generator</title>
+</head>
+
+<body>
+
+    <div class="hidden" id="page-1">
+        <img src="./assets/logo-qr-generator.svg" class="remove">
+        <div class="inputs">
+            <input id="input-url" type="url" placeholder="Enter an url">
+            <button id="input-button" onclick="callBoth()">QR code</button>
+        </div>
+    </div>
+    <div class="round-bg-qr">
+    </div>
+    <div id="img-qr">
+        <img src="" id="qr-image">
+    </div>
+
+    <script>
+        let imgQr = document.querySelector("#img-qr");
+        let qrImage = document.querySelector("#qr-image");
+        let inputUrl = document.querySelector("#input-url");
+        let page1 = document.querySelector("#page-1");
+
+        function generateQR() {
+            qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + inputUrl.value;
+            imgQr.style.display = "block"; // Mostra o QR Code
+            page1.style.display = "none";  // Esconde o primeiro layout
+        }
+
+        let roundBgQr = document.querySelector(".round-bg-qr");
+
+        function toggleCircle() {
+            roundBgQr.classList.add("visible"); // Adiciona a classe para mostrar o círculo
+        }
+
+        function callBoth() {
+            generateQR();  // Gera o QR Code
+            toggleCircle();
+            console.log('QR Code gerado e círculo exibido');
+        }
+
+    </script>
+</body>
+</html>
