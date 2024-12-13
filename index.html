@@ -12,8 +12,8 @@
 
 <body>
 
-    <div class="hidden" id="page-1">
-        <img src="./assets/logo-qr-generator.svg" class="remove">
+    <div id="page-1">
+        <img src="./assets/logo-qr-generator.svg" id="logo-start">
         <div class="inputs">
             <input id="input-url" type="url" placeholder="Enter an url">
             <button id="input-button" onclick="callBoth()">QR code</button>
@@ -21,32 +21,43 @@
     </div>
     <div class="round-bg-qr">
     </div>
-    <div id="img-qr">
-        <img src="" id="qr-image">
+    <div id="page-2">
+        <div id="img-qr">
+            <img src="" id="qr-image">
+        </div>
+        <div id="buttons-div">
+            <button id="download-button" class="button-end">Download &#x1F53D;</button>
+            <button id="share-button" class="button-end">Share &#x1f517;</button>
+        </div>
+        <img src="./assets/logo-qr-generator.svg" id="logo-end">
     </div>
-
     <script>
         let imgQr = document.querySelector("#img-qr");
         let qrImage = document.querySelector("#qr-image");
         let inputUrl = document.querySelector("#input-url");
         let page1 = document.querySelector("#page-1");
+        let page2 = document.querySelector("#page-2");
+        let logoEnd = document.querySelector("#logo-end")
 
         function generateQR() {
             qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + inputUrl.value;
-            imgQr.style.display = "block"; // Mostra o QR Code
-            page1.style.display = "none";  // Esconde o primeiro layout
+            imgQr.style.display = "block";
+            page1.style.display = "none";
+            page2.style.display = "flex";
+            roundBgQr.style.display = "block"
         }
 
         let roundBgQr = document.querySelector(".round-bg-qr");
 
         function toggleCircle() {
-            roundBgQr.classList.add("visible"); // Adiciona a classe para mostrar o círculo
+            roundBgQr.classList.add("visible");
+            page2.classList.add("visible");
+            logoEnd.classList.add("visible");
         }
 
         function callBoth() {
-            generateQR();  // Gera o QR Code
+            generateQR();
             toggleCircle();
-            console.log('QR Code gerado e círculo exibido');
         }
 
     </script>
